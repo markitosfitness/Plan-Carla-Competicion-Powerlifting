@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Guía Competición — Carla Ferrández</title>
+<style>
+/* ── RESET & BASE ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body {
+  font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: #F5F5F5;
+  color: #1A1A1A;
+  line-height: 1.55;
+}
+
+/* ── VARIABLES ────────────────────────────────────────────────── */
+:root {
+  --rojo:       #C62828;
+  --rojo-cl:    #FFEBEE;
+  --rojo-bor:   #EF9A9A;
+  --naranja:    #E65100;
+  --naranja-cl: #FFF3E0;
+  --verde:      #2E7D32;
+  --verde-cl:   #E8F5E9;
+  --azul:       #1565C0;
+  --azul-cl:    #E3F2FD;
+  --amarillo:   #F9A825;
+  --amarillo-cl:#FFFDE7;
+  --gris-cl:    #F5F5F5;
+  --gris-bor:   #E0E0E0;
+  --gris-txt:   #555;
+  --blanco:     #fff;
+  --radio:      8px;
+}
+
+/* ── PORTADA ──────────────────────────────────────────────────── */
+.portada {
+  background: var(--rojo);
+  color: #fff;
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.portada::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40%;
+  background: rgba(0,0,0,0.15);
+}
+.portada-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 0.3rem 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.portada h1 {
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.portada h1 span { display: block; font-size: 0.55em; font-weight: 300; opacity: 0.85; margin-bottom: 0.3rem; letter-spacing: 0.08em; }
+.portada-atleta {
+  position: relative;
+  margin-top: 2rem;
+  background: rgba(255,255,255,0.10);
+  border-radius: var(--radio);
+  padding: 1rem 1.5rem;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.portada-atleta p { font-size: 0.85rem; margin: 0.2rem 0; opacity: 0.92; }
+.portada-atleta strong { font-size: 1.1rem; display: block; margin-bottom: 0.5rem; }
+.lifts {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+.lift-item { text-align: center; }
+.lift-item .val { font-size: 1.4rem; font-weight: 700; }
+.lift-item .lbl { font-size: 0.65rem; letter-spacing: 0.1em; opacity: 0.75; text-transform: uppercase; }
+
+/* ── NAVEGACIÓN ───────────────────────────────────────────────── */
+.nav {
+  background: #111;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-inner { display: inline-flex; gap: 0; min-width: 100%; }
+.nav a {
+  display: inline-block;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav a:hover { color: #fff; border-bottom-color: var(--rojo); }
+
+/* ── LAYOUT GENERAL ───────────────────────────────────────────── */
+.contenido { max-width: 720px; margin: 0 auto; padding: 0 1rem 3rem; }
+
+/* ── SECCION ──────────────────────────────────────────────────── */
+.seccion { margin-top: 2rem; }
+.sec-header {
+  background: var(--rojo);
+  color: #fff;
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--radio) var(--radio) 0 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.sec-body {
+  background: #fff;
+  border: 1px solid var(--gris-bor);
+  border-top: none;
+  border-radius: 0 0 var(--radio) var(--radio);
+  padding: 1.2rem 1rem;
+}
+
+/* ── CAJAS DE INFO ────────────────────────────────────────────── */
+.caja { border-radius: var(--radio); padding: 0.8rem 1rem; margin: 0.75rem 0; font-size: 0.88rem; }
+.caja-azul  { background: var(--azul-cl); border-left: 3px solid var(--azul); }
+.caja-verde { background: var(--verde-cl); border-left: 3px solid var(--verde); }
+.caja-rojo  { background: var(--rojo-cl); border-left: 3px solid var(--rojo); }
+.caja-naranja { background: var(--naranja-cl); border-left: 3px solid var(--naranja); }
+.caja-amarillo { background: var(--amarillo-cl); border-left: 3px solid var(--amarillo); }
+.caja b { color: inherit; }
+
+/* ── TABLA MACROS ─────────────────────────────────────────────── */
+.tabla-wrap { overflow-x: auto; margin: 0.75rem 0; border-radius: var(--radio); }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+thead tr { background: var(--rojo); color: #fff; }
+thead th { padding: 0.55rem 0.7rem; text-align: left; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.05em; white-space: nowrap; }
+tbody tr:nth-child(odd)  { background: #fff; }
+tbody tr:nth-child(even) { background: var(--gris-cl); }
+tbody td { padding: 0.55rem 0.7rem; vertical-align: top; border-bottom: 1px solid var(--gris-bor); line-height: 1.4; }
+tbody tr:last-child td { border-bottom: none; }
+
+/* ── BLOQUE COMIDA ────────────────────────────────────────────── */
+.comida-header {
+  background: var(--naranja-cl);
+  border: 1px solid #ffcc80;
+  border-radius: var(--radio) var(--radio) 0 0;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--naranja);
+  margin-top: 1rem;
+}
+.comida-hora { font-size: 0.75rem; font-weight: 400; opacity: 0.8; }
+.opciones { border: 1px solid var(--gris-bor); border-top: none; border-radius: 0 0 var(--radio) var(--radio); overflow: hidden; }
+.opcion { padding: 0.7rem 1rem; font-size: 0.84rem; }
+.opcion:nth-child(odd)  { background: var(--verde-cl); }
+.opcion:nth-child(even) { background: var(--gris-cl); }
+.opcion-titulo { font-weight: 700; font-size: 0.8rem; margin-bottom: 0.3rem; color: #1A1A1A; }
+.opcion ul { list-style: none; margin: 0; }
+.opcion ul li::before { content: '•  '; color: var(--rojo); }
+.opcion ul li { font-size: 0.83rem; margin: 0.1rem 0; }
+.por-que { background: var(--azul-cl); border-top: 1px solid #bbdefb; padding: 0.6rem 1rem; font-size: 0.8rem; font-style: italic; color: var(--azul); border-radius: 0 0 var(--radio) var(--radio); }
+.por-que::before { content: '↳ '; font-style: normal; font-weight: 700; }
+
+/* ── DIA BADGE ────────────────────────────────────────────────── */
+.dia-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.5rem 0 0.5rem;
+}
+.dia-badge .dia-num {
+  background: var(--rojo);
+  color: #fff;
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1rem;
+  flex-shrink: 0;
+}
+.dia-badge .dia-info h3 { font-size: 1rem; font-weight: 700; }
+.dia-badge .dia-info p  { font-size: 0.78rem; color: var(--gris-txt); }
+
+/* ── MACROS RESUMEN DIA ───────────────────────────────────────── */
+.macros-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.5rem 0 1rem; }
+.chip { background: var(--gris-cl); border: 1px solid var(--gris-bor); border-radius: 20px; padding: 0.25rem 0.7rem; font-size: 0.75rem; font-weight: 600; }
+.chip.c { border-color: #90caf9; background: #e3f2fd; color: var(--azul); }
+.chip.p { border-color: #a5d6a7; background: #e8f5e9; color: var(--verde); }
+.chip.g { border-color: #ffcc80; background: #fff3e0; color: #e65100; }
+.chip.k { border-color: #f48fb1; background: #fce4ec; color: #c2185b; }
+
+/* ── PROTOCOLO TIMELINE ───────────────────────────────────────── */
+.timeline { position: relative; padding-left: 1.5rem; margin: 0.5rem 0; }
+.timeline::before { content: ''; position: absolute; left: 0.45rem; top: 0; bottom: 0; width: 2px; background: var(--gris-bor); }
+.tl-item { position: relative; margin-bottom: 1rem; }
+.tl-dot { position: absolute; left: -1.3rem; top: 0.2rem; width: 12px; height: 12px; background: var(--rojo); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 2px var(--rojo); }
+.tl-hora { font-size: 0.72rem; font-weight: 700; color: var(--rojo); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.15rem; }
+.tl-accion { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.15rem; }
+.tl-detalle { font-size: 0.82rem; color: var(--gris-txt); }
+.tl-pq { font-size: 0.78rem; font-style: italic; color: var(--azul); margin-top: 0.2rem; }
+
+/* ── MOCHILA GRID ─────────────────────────────────────────────── */
+.mochila-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.75rem 0; }
+@media (max-width: 400px) { .mochila-grid { grid-template-columns: 1fr; } }
+.mochila-item { background: var(--gris-cl); border: 1px solid var(--gris-bor); border-radius: 6px; padding: 0.6rem 0.8rem; font-size: 0.82rem; }
+.mochila-item .mi-cat { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gris-txt); margin-bottom: 0.15rem; }
+.mochila-item .mi-nom { font-weight: 700; font-size: 0.85rem; }
+.mochila-item .mi-qty { color: var(--naranja); font-size: 0.78rem; }
+.mochila-item .mi-why { font-size: 0.75rem; color: var(--gris-txt); margin-top: 0.2rem; }
+
+/* ── CONTINGENCIA ─────────────────────────────────────────────── */
+.cont-item { margin-bottom: 0.75rem; }
+.cont-item .cont-sit { font-weight: 700; font-size: 0.85rem; color: var(--rojo); }
+.cont-item .cont-acc { font-size: 0.83rem; margin-top: 0.15rem; }
+
+/* ══ SECCIÓN BLOQUEADA — CONTADOR ═══════════════════════════════ */
+#seccion-bloqueada {
+  margin-top: 2.5rem;
+  border-radius: var(--radio);
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+.lock-header {
+  background: #111;
+  color: #fff;
+  padding: 1.2rem 1.2rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.lock-icon-wrap {
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.lock-icon-wrap svg { width: 18px; height: 18px; fill: rgba(255,255,255,0.6); }
+.lock-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.lock-title { font-size: 0.95rem; font-weight: 600; margin-top: 0.1rem; }
+
+/* Contador */
+.contador-wrap {
+  background: #1A1A1A;
+  padding: 1.2rem 1.2rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.cnt-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.cnt-val {
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  background: #2A2A2A;
+  border: 1px solid #333;
+  border-radius: 6px;
+  min-width: 62px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.cnt-lbl { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: #555; }
+.cnt-sep { font-size: 2rem; color: #333; margin-bottom: 0.5rem; font-weight: 300; }
+
+/* mensaje bloqueado */
+#msg-bloqueado {
+  background: #1A1A1A;
+  padding: 0.75rem 1.2rem 1.2rem;
+  text-align: center;
+  border-top: 1px solid #222;
+}
+#msg-bloqueado p { font-size: 0.78rem; color: #444; }
+
+/* ── MENSAJE DESBLOQUEADO ─────────────────────────────────────── */
+#msg-desbloqueado {
+  display: none;
+  background: #111;
+  padding: 1.5rem 1.2rem 1.5rem;
+  text-align: center;
+}
+#msg-desbloqueado.visible { display: block; }
+
+.msg-pre { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: #444; margin-bottom: 1rem; }
+
+.msg-texto {
+  font-size: clamp(1rem, 3.5vw, 1.15rem);
+  color: rgba(255,255,255,0.88);
+  line-height: 1.8;
+  max-width: 380px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+.msg-firma {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.msg-firma::before,
+.msg-firma::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: #2A2A2A;
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────── */
+.footer {
+  margin-top: 3rem;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #999;
+  border-top: 1px solid var(--gris-bor);
+}
+
+/* ── UTILIDADES ───────────────────────────────────────────────── */
+.mt05 { margin-top: 0.5rem; }
+.mt1  { margin-top: 1rem; }
+.bold { font-weight: 700; }
+p { margin: 0.4rem 0; font-size: 0.88rem; }
+h4 { font-size: 0.85rem; font-weight: 700; margin: 0.75rem 0 0.3rem; color: #111; }
+</style>
+</head>
+<body>
+
+<!-- ══ PORTADA ═══════════════════════════════════════════════════ -->
+<div class="portada">
+  <div class="portada-badge">MarkitosFitness · Mayo 2026</div>
+  <h1>
+    <span>Guía de Competición</span>
+    Paso a Paso
+  </h1>
+  <div class="portada-atleta">
+    <strong>CARLA FERRÁNDEZ</strong>
+    <p>Categoría −76 kg &nbsp;·&nbsp; Pesaje 14:00 &nbsp;·&nbsp; Domingo 18 mayo 2026</p>
+    <div class="lifts">
+      <div class="lift-item"><div class="val">170 kg</div><div class="lbl">Sentadilla</div></div>
+      <div class="lift-item"><div class="val">95 kg</div><div class="lbl">Banca</div></div>
+      <div class="lift-item"><div class="val">175 kg</div><div class="lbl">Peso Muerto</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NAVEGACIÓN ════════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#situacion">Situación</a>
+    <a href="#jueves">Jueves</a>
+    <a href="#viernes">Viernes</a>
+    <a href="#sabado">Sábado</a>
+    <a href="#domingo">Domingo</a>
+    <a href="#mochila">Mochila</a>
+    <a href="#protocolo">Protocolo</a>
+    <a href="#prohibidos">Prohibidos</a>
+    <a href="#contingencias">Contingencias</a>
+  </div>
+</nav>
+
+<div class="contenido">
+
+<!-- ══ 1. SITUACIÓN ACTUAL ══════════════════════════════════════ -->
+<div class="seccion" id="situacion">
+  <div class="sec-header">1. Tu situación actual — lo que necesitas saber</div>
+  <div class="sec-body">
+    <p>Antes de arrancar con el plan, entendamos exactamente dónde estás y por qué esto es buena noticia.</p>
+    <div class="tabla-wrap mt1">
+      <table>
+        <thead><tr><th>Dato</th><th>Valor</th><th>Qué significa</th></tr></thead>
+        <tbody>
+          <tr><td>Peso hoy (miérc. noche)</td><td><b>74,7 kg</b></td><td>DENTRO de categoría. Margen de 1,3 kg.</td></tr>
+          <tr><td>Límite categoría</td><td>76,0 kg</td><td>Pesaje el domingo ~14:00</td></tr>
+          <tr><td>Peso hace 4 días</td><td>78,0 kg</td><td>Pérdida de 3,2 kg = glucógeno + agua, no grasa</td></tr>
+          <tr><td>Estado glucógeno</td><td><b style="color:var(--rojo)">BAJO</b></td><td>Por baja ingesta. Vamos a llenarlo.</td></tr>
+          <tr><td>Hidratación estimada</td><td><b style="color:var(--rojo)">SUBÓPTIMA</b></td><td>No cenar = no reponer. Lo corregimos.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="caja caja-verde">
+      <b>Clave:</b> El corte ya está hecho — sin quererlo. El objetivo de los próximos 4 días NO es seguir bajando. Es llegar <b>llena y fuerte</b> al domingo. Cada comida que te saltas es glucógeno que pierdes = kilos menos en la barra.
+    </div>
+
+    <h4>Macros día a día</h4>
+    <div class="tabla-wrap">
+      <table>
+        <thead><tr><th>Día</th><th>Kcal</th><th>Carbs</th><th>Prot</th><th>Grasa</th><th>Fibra</th></tr></thead>
+        <tbody>
+          <tr><td><b>Jueves</b></td><td>~2.400</td><td>320 g</td><td>150 g</td><td>65 g</td><td>Normal</td></tr>
+          <tr><td><b>Viernes</b></td><td>~2.400</td><td>320 g</td><td>150 g</td><td>65 g</td><td>Normal</td></tr>
+          <tr><td><b>Sábado</b></td><td>~2.250</td><td>350 g</td><td>135 g</td><td>50 g</td><td>&lt;12 g tarde</td></tr>
+          <tr><td><b>Domingo</b></td><td>Ver plan</td><td>Ver plan</td><td>Ver plan</td><td>Ver plan</td><td>Mínima</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="caja caja-rojo">
+      <b>ALERGIAS — nunca olvides:</b> Lácteos · Frutos secos naturales · Aguacate.<br>
+      El domingo CERO lácteos sin excepciones. Sin legumbres (gases → bracing comprometido).
+    </div>
+  </div>
+</div>
+
+<!-- ══ 2. JUEVES ═════════════════════════════════════════════════ -->
+<div class="seccion" id="jueves">
+  <div class="sec-header">2. Jueves — "Reset y Rellenar"</div>
+  <div class="sec-body">
+    <p>El jueves arrancamos la recarga. Tu cuerpo está como una esponja seca — va a absorber los carbohidratos rápidamente. Comer hoy ES entrenar para el domingo.</p>
+
+    <!-- Desayuno -->
+    <div class="comida-header">
+      <span class="comida-hora">08:00</span> — Desayuno &nbsp;<small>~435 kcal</small>
+    </div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 1 · Pan + Jamón Serrano</div>
+        <ul><li>80 g pan integral Hacendado</li><li>90 g jamón serrano Hacendado</li><li>60 g tomate triturado Hacendado</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 2 · Pan + Lomo de Pavo</div>
+        <ul><li>80 g pan integral Hacendado</li><li>64 g lomo de pavo Hacendado</li><li>10 g aceite de oliva</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 3 · Pan + Atún + Queso</div>
+        <ul><li>80 g pan integral Hacendado</li><li>60 g atún al natural</li><li>100 g tomate triturado</li><li>25 g queso Havarti (si lo toleras)</li></ul>
+      </div>
+    </div>
+    <div class="por-que">Pan integral da carbohidratos de absorción moderada que empiezan a rellenar el glucógeno hepático. La proteína arranca la síntesis de glucógeno muscular.</div>
+
+    <!-- Snack mañana -->
+    <div class="comida-header"><span class="comida-hora">10:30</span> — Snack media mañana &nbsp;<small>~220 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 1 · Potitos de frutas + Miel</div>
+        <ul><li>2 potitos de frutas Hero Baby (~200 g)</li><li>20 g miel</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 2 · Pan + Mermelada</div>
+        <ul><li>50 g pan de molde blanco</li><li>30 g mermelada de fresa Hacendado</li></ul>
+      </div>
+    </div>
+    <div class="por-que">Los potitos son perfectos: cero fibra dura, carbohidrato rápido, potasio natural. Fácil de comer incluso sin hambre.</div>
+
+    <!-- Comida -->
+    <div class="comida-header"><span class="comida-hora">13:30</span> — Comida principal &nbsp;<small>~535 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 1 · Arroz + Pollo + Huevo</div>
+        <ul><li>90 g arroz basmati (seco)</li><li>130 g pechuga de pollo Hacendado</li><li>1 huevo entero (55 g)</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 2 · Espaguetis + Carne Picada</div>
+        <ul><li>45 g espaguetis Carrefour</li><li>170 g carne picada vacuno Hacendado</li><li>120 g tomate frito sin sal Hacendado</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 3 · Estilo Kebab</div>
+        <ul><li>72 g tortillas integrales Hacendado</li><li>130 g pechuga de pollo Hacendado</li><li>25 g arroz basmati cocido</li><li>60 g yogur griego ligero (solo si lo toleras bien)</li><li>Especias: comino, orégano, cebolla en polvo</li></ul>
+      </div>
+    </div>
+    <div class="por-que">La comida más importante del día. El arroz basmati recarga el glucógeno muscular rápidamente. Cada gramo de glucógeno almacena ~3 g de agua intramuscular → mejor bracing en sentadilla y muerto.</div>
+
+    <!-- Bol proteico post-comida -->
+    <div class="comida-header"><span class="comida-hora">15:00</span> — Postre de la comida &nbsp;<small>~330 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Bol proteico</div>
+        <ul><li>200 g queso fresco batido 0% Hacendado</li><li>20 g whey protein</li><li>30 g mermelada de fresa Hacendado</li><li>20 g corn flakes o arroz inflado Hacendado</li><li>10 g miel</li></ul>
+      </div>
+    </div>
+    <div class="por-que">Lo ponemos a mediodía (no por la noche) para que la digestión activa gestione mejor la lactosa residual y te levantes sin sensación de hinchazón. La proteína sigue alimentando la síntesis de glucógeno durante la tarde.</div>
+
+    <!-- Pre-entreno -->
+    <div class="comida-header"><span class="comida-hora">15:30-16:00</span> — PRE-ENTRENO &nbsp;<small>~190 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Tortitas de arroz + Miel + Mermelada</div>
+        <ul><li>31 g tortitas de arroz Hacendado</li><li>30 g miel</li><li>30 g mermelada de fresa Hacendado</li></ul>
+      </div>
+    </div>
+    <div class="por-que">PRE-entreno, no post. Este carbohidrato rápido entra en sangre en 20-30 min: glucosa disponible justo cuando arranca la sesión. Y lo más importante: es el snack del domingo entre intentos — practica con él.</div>
+
+    <!-- Cena -->
+    <div class="comida-header"><span class="comida-hora">20:30</span> — Cena (NO saltarte) &nbsp;<small>~680 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 1 · Salmón + Arroz</div>
+        <ul><li>180 g salmón Hacendado</li><li>80 g arroz basmati (seco)</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 2 · Patata + Pollo</div>
+        <ul><li>280 g patata cocida</li><li>120 g pechuga de pollo Hacendado</li><li>50 g queso Havarti (si lo toleras)</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 3 · Hamburguesa Integral</div>
+        <ul><li>80 g pan hamburguesa integral Hacendado</li><li>140 g carne picada vacuno Hacendado</li><li>25 g queso Havarti light (si toleras)</li><li>100 g patata cocida</li></ul>
+      </div>
+    </div>
+    <div class="por-que">LA CENA ES OBLIGATORIA. El salmón aporta omega-3 antiinflamatorio. Subimos el arroz a 80 g porque el cuerpo sigue sintetizando glucógeno durmiendo si tiene proteína disponible.</div>
+
+    <!-- Postre noche ligero -->
+    <div class="comida-header"><span class="comida-hora">21:30</span> — Postre noche (ligero) &nbsp;<small>~130 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 1 · Tortitas con mermelada (recomendada)</div>
+        <ul><li>2 tortitas de arroz Hacendado</li><li>20 g mermelada de fresa</li><li>10 g miel</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 2 · Bol ligero (solo si lo toleras sin molestias)</div>
+        <ul><li>150 g queso fresco batido 0%</li><li>15 g whey protein</li><li>20 g mermelada + 15 g corn flakes</li></ul>
+      </div>
+    </div>
+    <div class="por-que">Cierre dulce sin comprometer la digestión nocturna. Si la opción 2 te genera hinchazón al levantarte, quédate con la opción 1.</div>
+
+    <div class="caja caja-azul mt1">
+      <b>Líquidos jueves:</b> 3 litros. Incluye 500 ml con electrolitos post-entreno (agua + ½ cdta sal + 1 cda azúcar + limón).<br>
+      <b>Entrenamiento:</b> sesión MUY ligera. 50-65% 1RM, máximo 2-3 series. Esto ya es tapering.
+    </div>
+  </div>
+</div>
+
+<!-- ══ 3. VIERNES ════════════════════════════════════════════════ -->
+<div class="seccion" id="viernes">
+  <div class="sec-header">3. Viernes — "Mantener el Tanque"</div>
+  <div class="sec-body">
+    <p>Misma estructura que el jueves. Solo cambiamos algunos alimentos para no aburrirte. <b>Hoy NO entrenas</b> o máximo un paseo de 20-30 min.</p>
+
+    <div class="comida-header"><span class="comida-hora">08:00</span> — Desayuno</div>
+    <div class="opciones">
+      <div class="opcion"><div class="opcion-titulo">Opción 1 · Pan + Lomo de Pavo</div><ul><li>80 g pan integral Hacendado</li><li>64 g lomo de pavo Hacendado</li><li>10 g aceite de oliva</li></ul></div>
+      <div class="opcion"><div class="opcion-titulo">Opción 2 · Pan + Jamón Serrano</div><ul><li>80 g pan integral Hacendado</li><li>90 g jamón serrano Hacendado</li><li>60 g tomate triturado</li></ul></div>
+    </div>
+    <div class="por-que">Alternamos proteínas para variedad en el perfil de aminoácidos.</div>
+
+    <div class="comida-header"><span class="comida-hora">10:30</span> — Snack media mañana</div>
+    <div class="opciones">
+      <div class="opcion"><div class="opcion-titulo">Potitos de frutas + Miel</div><ul><li>2 potitos Hero Baby (~200 g)</li><li>20 g miel o 50 g pan + 30 g mermelada</li></ul></div>
+    </div>
+    <div class="por-que">Igual que el jueves. Mantiene la glucemia estable y el aporte de carbohidratos sin picos.</div>
+
+    <div class="comida-header"><span class="comida-hora">13:30</span> — Comida principal</div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 1 · Estilo Kebab (recomendada viernes)</div>
+        <ul><li>72 g tortillas integrales Hacendado</li><li>130 g pechuga de pollo Hacendado</li><li>25 g arroz basmati cocido</li><li>60 g yogur griego ligero (SOLO si lo toleras sin síntomas)</li><li>Especias al gusto</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 2 · Atún + Arroz</div>
+        <ul><li>60 g atún al natural (lata)</li><li>60 g arroz basmati</li><li>40 g Ligeresa Original</li><li>5 g alga nori Carrefour</li></ul>
+      </div>
+    </div>
+    <div class="por-que">Si el yogur griego te genera molestias (gases, hinchazón), sustitúyelo por 30 g más de pollo + 10 g aceite. No experimentes a 2 días de la competición.</div>
+
+    <div class="comida-header"><span class="comida-hora">15:00</span> — Postre comida &nbsp;<small>~330 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion"><div class="opcion-titulo">Bol proteico (igual que jueves)</div>
+      <ul><li>200 g queso fresco batido 0%</li><li>20 g whey protein</li><li>30 g mermelada de fresa + 20 g corn flakes + 10 g miel</li></ul></div>
+    </div>
+    <div class="por-que">Mismo protocolo que el jueves: proteína a mediodía, no por la noche.</div>
+
+    <div class="comida-header"><span class="comida-hora">15:30-16:00</span> — Merienda carbohidrato</div>
+    <div class="opciones">
+      <div class="opcion"><div class="opcion-titulo">Tortitas + Miel + Mermelada</div>
+      <ul><li>31 g tortitas de arroz Hacendado</li><li>30 g miel</li><li>30 g mermelada de fresa Hacendado</li></ul></div>
+    </div>
+    <div class="por-que">El viernes no entrenas, pero el snack sigue siendo útil para mantener el aporte de carbohidratos distribuido. Sigue practicando con las tortitas.</div>
+
+    <div class="comida-header"><span class="comida-hora">20:30</span> — Cena</div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 1 · Pizza Casera (recomendada viernes)</div>
+        <ul><li>70 g base pizza artesana extrafina Hacendado</li><li>40 g tomate frito sin sal Hacendado</li><li>Orégano</li><li>37,5 g queso Havarti light (si toleras)</li><li>40 g queso fundir Hacendado (si toleras)</li><li>25 g pechuga de pavo 92% Hacendado</li><li>80 g carne picada vacuno Hacendado</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 2 · Gnocchi + Carne Picada</div>
+        <ul><li>200 g gnocchi quesos Hacendado</li><li>140 g carne picada vacuno Hacendado</li><li>25 g queso Havarti (si toleras)</li></ul>
+      </div>
+    </div>
+    <div class="por-que">La pizza casera es psicológicamente fácil de comer incluso cuando el estómago está cerrado. Si cualquier lácteo te genera molestias, elimínalo y sustituye por más carne o pavo.</div>
+
+    <div class="comida-header"><span class="comida-hora">21:30</span> — Postre noche ligero</div>
+    <div class="opciones">
+      <div class="opcion"><div class="opcion-titulo">Tortitas con mermelada</div>
+      <ul><li>2 tortitas de arroz Hacendado</li><li>20 g mermelada de fresa</li><li>10 g miel</li></ul></div>
+    </div>
+    <div class="por-que">Cierre dulce. Lo más importante es que duermas bien y te levantes sin molestias el sábado.</div>
+
+    <div class="caja caja-azul mt1">
+      <b>Líquidos viernes:</b> 3 litros. Última toma importante antes de las 21:00.<br>
+      <b>Cafeína:</b> ninguna después de las 16:00. Necesitas dormir bien esta noche.<br>
+      <b>Entrenamiento: DESCANSO TOTAL.</b> Sin sauna, sin cardio, sin pesas.
+    </div>
+  </div>
+</div>
+
+<!-- ══ 4. SÁBADO ══════════════════════════════════════════════════ -->
+<div class="seccion" id="sabado">
+  <div class="sec-header">4. Sábado — "El Día Más Importante de los 4"</div>
+  <div class="sec-body">
+    <p>Tres objetivos: (1) última carga grande de carbohidratos por la mañana, (2) cambiar a <b>baja fibra desde la comida del mediodía</b> para llegar al domingo con el intestino limpio, (3) reducir líquidos desde las 20:00.</p>
+    <div class="caja caja-amarillo">
+      <b>Regla de oro del sábado tarde:</b> desde la comida del mediodía, cero fibra alta. Sin verduras de hoja, sin pan integral, sin legumbres, sin frutos secos. Cada gramo de fibra reducida = menos volumen intestinal el domingo = más fácil dar el peso.
+    </div>
+
+    <div class="comida-header"><span class="comida-hora">08:30</span> — Desayuno sábado &nbsp;<small>~600 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Pan BLANCO + Proteína + Dulce (NO integral hoy)</div>
+        <ul><li>120 g baguette o pan blanco</li><li>90 g jamón serrano Hacendado</li><li>30 g miel o mermelada de fresa</li></ul>
+      </div>
+    </div>
+    <div class="por-que">Pan blanco a propósito: mismos carbohidratos, menos fibra. Es la transición a la dieta de bajo residuo.</div>
+
+    <div class="comida-header"><span class="comida-hora">11:00</span> — Snack pre-carga &nbsp;<small>~370 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Arroz blanco + Pollo</div>
+        <ul><li>200 g arroz blanco hervido (peso cocido)</li><li>80 g pechuga de pollo a la plancha</li><li>Sal al gusto</li></ul>
+      </div>
+    </div>
+    <div class="por-que">El "pre-load" de glucógeno del sábado. Arroz blanco = máxima densidad de carbohidrato con mínima fibra. Se digiere en 45-60 min y va directo al músculo.</div>
+
+    <div class="comida-header"><span class="comida-hora">13:30</span> — Última comida con volumen normal &nbsp;<small>~575 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Arroz + Pollo + Huevo</div>
+        <ul><li>100 g arroz basmati (seco) — la mayor cantidad del fin de semana</li><li>130 g pechuga de pollo Hacendado</li><li>1 huevo entero</li><li>1 cda aceite de oliva</li><li>SIN verduras de hoja, sin tomate fresco</li></ul>
+      </div>
+    </div>
+    <div class="por-que">Es el último momento para una carga sólida. A partir de aquí reducimos volumen para llegar al pesaje con el mínimo contenido gastrointestinal posible.</div>
+
+    <div class="comida-header"><span class="comida-hora">17:00</span> — Merienda baja fibra &nbsp;<small>~250 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Tortitas + Miel + Mermelada</div>
+        <ul><li>2-3 tortitas de arroz Hacendado</li><li>30 g miel</li><li>30 g mermelada de fresa (colada si posible)</li></ul>
+      </div>
+    </div>
+    <div class="por-que">Carbohidrato puro sin volumen. Seguimos recargando glucógeno sin aumentar el contenido intestinal.</div>
+
+    <div class="comida-header"><span class="comida-hora">20:00</span> — Cena sábado (pequeña y baja en fibra) &nbsp;<small>~450 kcal</small></div>
+    <div class="opciones">
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 1 · Pasta blanca + Pollo</div>
+        <ul><li>100 g pasta blanca (NO integral)</li><li>100 g pechuga de pollo Hacendado</li><li>50 g tomate frito sin sal Hacendado</li><li>Sal al gusto · SIN queso · SIN pan</li></ul>
+      </div>
+      <div class="opcion">
+        <div class="opcion-titulo">Opción 2 · Arroz blanco + Atún</div>
+        <ul><li>80 g arroz blanco</li><li>120 g atún al natural</li><li>1 cda aceite de oliva</li></ul>
+      </div>
+    </div>
+    <div class="por-que">Cena pequeña a propósito. Grasa reducida para no ralentizar el vaciado gástrico. Última comida antes de las 21:00.</div>
+
+    <div class="caja caja-azul mt1">
+      <b>Báscula sábado por la noche:</b><br>
+      ≤74,0 kg → come un par de tortitas con miel extra. Estás muy baja.<br>
+      74,0–75,5 kg → perfecto, plan en curso.<br>
+      75,5–75,9 kg → omite el snack nocturno y reduce agua de la noche.<br>
+      ≥76,0 kg → avisa a Markos. No hagas nada extremo.<br><br>
+      <b>Líquidos:</b> 2,5 L hasta las 20:00. Solo sorbos después. 1 vaso con sal a las 22:00.<br>
+      <b>Dormir:</b> acuéstate entre las 22:30 y las 23:00. Cama oscura y fresca.<br>
+      <b>Entrenamiento: CERO.</b>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 5. DOMINGO — ANTES DEL PESAJE ════════════════════════════ -->
+<div class="seccion" id="domingo">
+  <div class="sec-header">5. Domingo — Del Despertar al Pesaje</div>
+  <div class="sec-body">
+    <div class="tabla-wrap">
+      <table>
+        <thead><tr><th>Hora</th><th>Acción</th><th>Detalle</th></tr></thead>
+        <tbody>
+          <tr><td><b>06:30</b></td><td>Despertar + báscula propia</td><td>Solo ropa interior, tras orinar. Compara con la guía de abajo.</td></tr>
+          <tr><td><b>07:30</b></td><td>Desayuno (si el peso lo permite)</td><td>50-60 g pan blanco + 50 g pavo + 20 g miel. ~300 kcal. 200 ml agua + pizca de sal. SIN queso, SIN tomate.</td></tr>
+          <tr><td><b>08:30</b></td><td>Llegada al recinto</td><td>Reconocer la zona de pesaje y zona de calentamiento.</td></tr>
+          <tr><td><b>10:00</b></td><td>Sorbo de agua</td><td>150 ml. Solo mantener la boca húmeda.</td></tr>
+          <tr><td><b>12:00</b></td><td>Báscula de control</td><td>Objetivo: 75,0–75,8 kg. Margen seguro.</td></tr>
+          <tr><td><b>12:30-13:30</b></td><td>Agua mínima</td><td>Máx. 300 ml en sorbos pequeños.</td></tr>
+          <tr><td><b>13:30</b></td><td>A zona de pesaje</td><td>Llevar la mochila de refeed preparada.</td></tr>
+          <tr><td><b>14:00</b></td><td>PESAJE OFICIAL</td><td>En cuanto bajas de la báscula, empieza el protocolo de refeed.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="mt1">Guía de peso en báscula propia (06:30)</h4>
+    <div class="tabla-wrap">
+      <table>
+        <thead><tr><th>Peso</th><th>Qué hacer</th></tr></thead>
+        <tbody>
+          <tr><td>≤73,5 kg</td><td>Desayuno completo + 300 ml agua con sales. Estás demasiado baja. Pesar 75 kg llena es mejor que 73 kg vacía.</td></tr>
+          <tr><td>73,5–74,5 kg</td><td>Desayuno normal (50-60 g pan + proteína + miel). Todo en orden.</td></tr>
+          <tr><td>74,5–75,3 kg</td><td>Desayuno pequeño (40 g pan + proteína, sin miel). Dentro del margen.</td></tr>
+          <tr><td>75,3–75,8 kg</td><td>Solo 1 huevo cocido + 30 g pan blanco + 200 ml agua. Margen justo.</td></tr>
+          <tr><td>75,8–76,0 kg</td><td>Solo agua a sorbos. Avisa a Markos. Caminata suave 15 min.</td></tr>
+          <tr><td>≥76,0 kg</td><td>Ver plan de contingencias (sección 8).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 6. MOCHILA ════════════════════════════════════════════════ -->
+<div class="seccion" id="mochila">
+  <div class="sec-header">6. La Mochila de Refeed — Preparar el Sábado por la Noche</div>
+  <div class="sec-body">
+    <p>Prepárala el sábado por la noche. El domingo solo tienes que levantar.</p>
+    <div class="caja caja-amarillo">
+      <b>Importante:</b> entre intentos SOLO carbohidratos ultrarápidos (Powerade, gominolas, potitos, tortitas). No hay tiempo de digestión entre disciplinas. La comida sólida va en la ventana post-pesaje 14:00-15:30, antes del calentamiento.
+    </div>
+
+    <h4>Bebidas</h4>
+    <div class="mochila-grid">
+      <div class="mochila-item"><div class="mi-cat">Bebida</div><div class="mi-nom">Powerade / Aquarius</div><div class="mi-qty">2 × 500 ml</div><div class="mi-why">Glucosa + sodio. Empezar nada más bajar de la báscula.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Bebida</div><div class="mi-nom">Agua mineral</div><div class="mi-qty">1 litro</div><div class="mi-why">Hidratación entre intentos.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Bebida</div><div class="mi-nom">Café americano (sin leche)</div><div class="mi-qty">~200 mg cafeína</div><div class="mi-why">Tomar a las 15:15 para pico a las 16:15 (sentadilla).</div></div>
+    </div>
+
+    <h4>Sólidos rápidos (entre intentos)</h4>
+    <div class="mochila-grid">
+      <div class="mochila-item"><div class="mi-cat">Rápido</div><div class="mi-nom">Donut glasé (chafado)</div><div class="mi-qty">1 unidad</div><div class="mi-why">Calorías densas + glucosa rápida. Te funcionó antes. Es parte del ritual.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Rápido</div><div class="mi-nom">Tortitas de arroz Hacendado</div><div class="mi-qty">3-4 paquetes</div><div class="mi-why">Carbohidrato puro sin fibra. Ideal entre intentos.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Rápido</div><div class="mi-nom">Miel</div><div class="mi-qty">~100 g</div><div class="mi-why">Para las tortitas.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Rápido</div><div class="mi-nom">Mermelada de fresa</div><div class="mi-qty">~100 g</div><div class="mi-why">Para las tortitas.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Rápido</div><div class="mi-nom">Potitos Hero Baby</div><div class="mi-qty">4-6 unidades</div><div class="mi-why">Potasio + carbo rápido. Sin fibra, sin alergia.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Rápido</div><div class="mi-nom">Gominolas Haribo (sin regaliz negro)</div><div class="mi-qty">100-150 g</div><div class="mi-why">Sacarosa pura. Glucemia entre intentos.</div></div>
+    </div>
+
+    <h4>Sólidos para ventana post-pesaje (14:00-15:30)</h4>
+    <div class="mochila-grid">
+      <div class="mochila-item"><div class="mi-cat">Pre-comp</div><div class="mi-nom">Sandwich pollo + pan blanco</div><div class="mi-qty">1 preparado el sábado</div><div class="mi-why">100 g pollo plancha + pan de molde blanco. Sin lechuga ni salsas. Solo antes del calentamiento.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Pre-comp</div><div class="mi-nom">Potitos de frutas extra</div><div class="mi-qty">2 adicionales</div><div class="mi-why">Si el estómago está cerrado y no puedes con el sandwich.</div></div>
+    </div>
+
+    <h4>Extras</h4>
+    <div class="mochila-grid">
+      <div class="mochila-item"><div class="mi-cat">Extra</div><div class="mi-nom">Creatina monohidrato</div><div class="mi-qty">3 g</div><div class="mi-why">Disolver en el Powerade post-pesaje.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Extra</div><div class="mi-nom">Sales de rehidratación oral</div><div class="mi-qty">2 sobres</div><div class="mi-why">O casero: ½ cdta sal + 1 cda azúcar por 500 ml agua.</div></div>
+      <div class="mochila-item"><div class="mi-cat">Extra</div><div class="mi-nom">Chicles azucarados (sin sorbitol)</div><div class="mi-qty">Varios</div><div class="mi-why">Cuando no puedes comer sólido. Mantienen boca húmeda.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 7. PROTOCOLO MINUTO A MINUTO ══════════════════════════════ -->
+<div class="seccion" id="protocolo">
+  <div class="sec-header">7. Protocolo Minuto a Minuto — Del Pesaje al Último Intento</div>
+  <div class="sec-body">
+    <div class="caja caja-verde">
+      <b>Regla de oro:</b> come y bebe poco a poco, nunca de golpe. El estómago lleno perjudica el bracing.<br>
+      <b>Donut:</b> glucosa rápida + efecto placentero, ya te funcionó. <b>Powerade:</b> beber los primeros 2 minutos post-pesaje sin falta.
+    </div>
+
+    <h4 class="mt1">De 14:00 al calentamiento</h4>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">14:02</div><div class="tl-accion">500 ml Powerade a sorbos + 3 g creatina disueltos</div><div class="tl-detalle">Todo el bote en 15-20 min. No lo apures de golpe.</div><div class="tl-pq">Glucosa + sodio inicia rehidratación celular. Empezar ya.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">14:05 – 14:25</div><div class="tl-accion">Donut glasé chafado + 2 tortitas con miel y mermelada</div><div class="tl-detalle">1 donut (~70 g). 2 tortitas + miel + mermelada. Total ~70 g carbos.</div><div class="tl-pq">Primer bolus de carbos rápidos. Come tranquila, sin prisa.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">14:30</div><div class="tl-accion">Cafeína — café americano o pastilla (200 mg)</div><div class="tl-detalle">1 café sin leche o pastilla NoDoz.</div><div class="tl-pq">Pico plasmático a los 45-60 min = justo antes de la sentadilla (~16:15). Reduce el esfuerzo percibido.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">14:30 – 14:50</div><div class="tl-accion">1 potito de frutas + 300 ml agua con sal</div><div class="tl-detalle">1 potito Hero Baby. 300 ml agua + pizca de sal.</div><div class="tl-pq">Continúa la rehidratación. El potasio retiene fluido en el músculo.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">14:30 – 15:30</div><div class="tl-accion">Sandwich pollo + pan blanco (si el estómago lo permite)</div><div class="tl-detalle">100 g pollo + pan de molde blanco. Sin prisa. Solo si el cuerpo lo pide.</div><div class="tl-pq">Única comida sólida entre pesaje y competición. Hay tiempo de digestión en esta ventana.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">15:15 – 15:30</div><div class="tl-accion">Gominolas</div><div class="tl-detalle">30 g Haribo. No te llenes.</div><div class="tl-pq">Mantener glucemia estable antes del primer intento.</div></div>
+    </div>
+
+    <h4>Calentamiento y sentadilla</h4>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">15:30 – 16:00</div><div class="tl-accion">CALENTAMIENTO CON BARRA</div><div class="tl-detalle">Zona habilitada del recinto. Lleva gominolas y Powerade contigo.</div><div class="tl-pq">Progresas con barra hasta cerca de apertura. Come algo pequeño entre series para no llegar con la glucemia baja.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">~16:15 – 16:30</div><div class="tl-accion">SENTADILLA — 1er intento</div><div class="tl-detalle">Apertura: 150-155 kg (88-91% de 170 kg).</div><div class="tl-pq">Apertura conservadora. Confirma el marcador sin quemar el SNC.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">Entre intentos sentadilla</div><div class="tl-accion">Sorbos Powerade + 1-2 gominolas</div><div class="tl-detalle">Dosis pequeñas. Nada que llene el estómago.</div><div class="tl-pq">Mantener glucemia. No hay tiempo de digestión entre intentos.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">Post-sentadilla</div><div class="tl-accion">Powerade + gominolas + 2ª dosis cafeína</div><div class="tl-detalle">300 ml Powerade. 50 g gominolas. 100 mg cafeína (café o cápsula).</div><div class="tl-pq">Solo carbos rápidos. 2ª dosis de cafeína (~300 mg total) prepara el pico para el muerto.</div></div>
+    </div>
+
+    <h4>Banca y Peso Muerto</h4>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">Pre-banca (~15 min antes)</div><div class="tl-accion">Solo agua. No comer.</div><div class="tl-detalle">Máx. 100-150 ml.</div><div class="tl-pq">Estómago lleno en banca arqueada = riesgo de reflujo. Nada sólido.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">Entre intentos banca</div><div class="tl-accion">Sorbos Powerade + gominolas</div><div class="tl-detalle">Cantidades pequeñas.</div><div class="tl-pq">Mantenimiento de glucemia. Igual que en sentadilla.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">Post-banca</div><div class="tl-accion">Powerade + gominolas + potito de frutas</div><div class="tl-detalle">200-300 ml Powerade. 50 g gominolas. 1 potito Hero Baby.</div><div class="tl-pq">El muerto es el lift más exigente. Carbos ultrarápidos, sin sólidos pesados.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-hora">Entre intentos muerto</div><div class="tl-accion">Gominolas + sorbos Powerade</div><div class="tl-detalle">30-50 g gominolas. Sorbo Powerade entre cada intento.</div><div class="tl-pq">Glucemia estable para los 3 tirones. El 3er intento es el más duro mentalmente.</div></div>
+    </div>
+
+    <div class="caja caja-verde mt1">
+      <b>Totales post-pesaje estimados:</b> Líquidos: 1,0-1,4 L · Carbohidratos: 120-180 g · Cafeína: 250-300 mg · Calorías: ~500-700 kcal
+    </div>
+  </div>
+</div>
+
+<!-- ══ 8. PROHIBIDOS ══════════════════════════════════════════════ -->
+<div class="seccion" id="prohibidos">
+  <div class="sec-header">8. Alimentos Prohibidos Estos 4 Días</div>
+  <div class="sec-body">
+    <div class="tabla-wrap">
+      <table>
+        <thead><tr><th>Alimento</th><th>Por qué evitarlo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Legumbres</b> (alubias, garbanzos, lentejas)</td><td>Fermentación intestinal → gases → distensión → bracing comprometido en sentadilla y muerto.</td></tr>
+          <tr><td><b>Brócoli, coliflor, repollo</b></td><td>Azufre + fibra fermentable. Producen flatulencia en 2-4 horas.</td></tr>
+          <tr><td><b>Frutos secos naturales</b></td><td>ALERGENOS. Fuera sin excepciones.</td></tr>
+          <tr><td><b>Aguacate</b></td><td>ALERGIA. Fuera sin excepciones.</td></tr>
+          <tr><td><b>Lácteos el domingo</b></td><td>Alergia reportada. El estrés del día puede amplificar cualquier reacción. Cero lácteos el domingo.</td></tr>
+          <tr><td><b>Alimentos muy grasos</b> (fritos, salsas pesadas)</td><td>Ralentizan el vaciado gástrico. Pesadez durante el bracing.</td></tr>
+          <tr><td><b>Fibra alta el sábado tarde y domingo</b></td><td>Más contenido intestinal = más peso en báscula + riesgo de necesitar baño en competición.</td></tr>
+          <tr><td><b>Alcohol</b></td><td>Deshidratación, peor sueño, menos síntesis de glucógeno. Inhibidor total.</td></tr>
+          <tr><td><b>Ibuprofeno o naproxeno el domingo</b></td><td>Con deshidratación parcial aumenta el riesgo renal. Solo paracetamol si hay dolor.</td></tr>
+          <tr><td><b>Cualquier alimento nuevo</b></td><td>Regla de oro: NUNCA nada que no hayas probado antes en competición.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 9. CONTINGENCIAS ═══════════════════════════════════════════ -->
+<div class="seccion" id="contingencias">
+  <div class="sec-header">9. Qué Hacer si Algo Sale Mal</div>
+  <div class="sec-body">
+    <div class="cont-item"><div class="cont-sit">Domingo mañana SOBRE peso (&gt;76,0 kg)</div><div class="cont-acc">Caminata suave 20 min + baño caliente 38-40° durante 15 min. Chicle azucarado + escupir (spitting). Avisa a Markos. NO sauna larga, NO cardio fuerte.</div></div>
+    <div class="cont-item"><div class="cont-sit">Domingo mañana MUY BAJO peso (&lt;73,5 kg)</div><div class="cont-acc">Desayuno completo + 300 ml agua con sales. Pesar 75 kg llena es mejor que 73 kg vacía y sin glucógeno.</div></div>
+    <div class="cont-item"><div class="cont-sit">Malestar digestivo en el recinto</div><div class="cont-acc">Parar sólidos. Sorbos de Powerade. Paseo lento 10 min. Volver a comer en 30 min con tortitas de arroz únicamente.</div></div>
+    <div class="cont-item"><div class="cont-sit">Calambres</div><div class="cont-acc">1 sobre de sales orales + 250 ml agua + 1 potito de frutas. Estirar suave.</div></div>
+    <div class="cont-item"><div class="cont-sit">No puedes comer por nervios</div><div class="cont-acc">Batido: 60 g avena instantánea + 30 g whey + 30 g miel + 300 ml agua (~500 kcal fácil de tragar). O tortitas con miel, de una en una.</div></div>
+    <div class="cont-item"><div class="cont-sit">Fallas la apertura</div><div class="cont-acc">Calma. Come y bebe entre intentos. La apertura es solo el primer dato. Tienes 8 intentos más.</div></div>
+
+    <div class="caja caja-azul mt1">
+      <b>Recuerda:</b><br>
+      El trabajo está hecho. Estos 4 días son para llegar FUERTE, no más ligera.<br>
+      Comer es parte del entrenamiento. Cada comida que te saltas es un kilo menos en la barra.<br>
+      El donut, el Powerade, las tortitas — son herramientas de rendimiento. No son trampa.
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECCIÓN BLOQUEADA ══════════════════════════════════════════ -->
+<div id="seccion-bloqueada">
+  <div class="lock-header">
+    <div class="lock-icon-wrap">
+      <svg viewBox="0 0 24 24"><path d="M18 10h-1V7A5 5 0 0 0 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2zm-6 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3-7H9V7a3 3 0 0 1 6 0v3z"/></svg>
+    </div>
+    <div>
+      <div class="lock-label">Se abre el domingo por la mañana</div>
+    </div>
+  </div>
+
+  <!-- Contador -->
+  <div class="contador-wrap" id="contador-wrap">
+    <div class="cnt-box"><div class="cnt-val" id="c-dias">--</div><div class="cnt-lbl">días</div></div>
+    <span class="cnt-sep">:</span>
+    <div class="cnt-box"><div class="cnt-val" id="c-horas">--</div><div class="cnt-lbl">horas</div></div>
+    <span class="cnt-sep">:</span>
+    <div class="cnt-box"><div class="cnt-val" id="c-min">--</div><div class="cnt-lbl">min</div></div>
+    <span class="cnt-sep">:</span>
+    <div class="cnt-box"><div class="cnt-val" id="c-seg">--</div><div class="cnt-lbl">seg</div></div>
+  </div>
+
+  <div id="msg-bloqueado">
+    <p></p>
+  </div>
+
+  <!-- Mensaje oculto -->
+  <div id="msg-desbloqueado">
+    <p class="msg-pre">Para Carla · Domingo</p>
+    <p class="msg-texto">
+      Hoy es tuyo.<br><br>
+      Sal ahí y haz lo que sabes hacer.<br>
+      Lo sabes hacer muy bien.<br><br>
+      Las cosas buenas cuestan. Pero las que cuestan<br>
+      son las que de verdad merecen la pena.<br><br>
+      Estoy muy orgulloso de ti.<br>
+      Te quiero.
+    </p>
+    <div class="msg-firma">Markos</div>
+  </div>
+</div>
+
+<div class="footer">
+  Protocolo elaborado por MarkitosFitness &nbsp;·&nbsp; Uso exclusivo de la atleta &nbsp;·&nbsp; Mayo 2026
+</div>
+
+</div><!-- fin .contenido -->
+
+<script>
+// ── Fecha de desbloqueo: domingo 17 mayo 2026 a las 07:00 ──────────────────
+// (ajusta el año/mes/día si la competición es otro domingo)
+const UNLOCK = new Date('2026-05-17T07:00:00');
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function tick() {
+  const diff = UNLOCK - new Date();
+  if (diff <= 0) {
+    desbloquear();
+    return;
+  }
+  const d = Math.floor(diff / 864e5);
+  const h = Math.floor((diff % 864e5) / 36e5);
+  const m = Math.floor((diff % 36e5)  / 6e4);
+  const s = Math.floor((diff % 6e4)   / 1e3);
+  document.getElementById('c-dias').textContent  = pad(d);
+  document.getElementById('c-horas').textContent = pad(h);
+  document.getElementById('c-min').textContent   = pad(m);
+  document.getElementById('c-seg').textContent   = pad(s);
+}
+
+function desbloquear() {
+  clearInterval(interval);
+  document.getElementById('contador-wrap').style.display = 'none';
+  document.getElementById('msg-bloqueado').style.display = 'none';
+  const msg = document.getElementById('msg-desbloqueado');
+  msg.classList.add('visible');
+}
+
+tick();
+const interval = setInterval(tick, 1000);
+
+// Preview rápido: abre la URL con ?open para ver el mensaje ya
+if (location.search.includes('open')) desbloquear();
+</script>
+</body>
+</html>
